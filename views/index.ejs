@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="./favicon.png" type="img/x-icon">
-    <title>Stockr Finance ~ Home Page</title>
+    <title>Tech Alerts ~ Home Page</title>
 
-    <meta name="description" content="Stockr Finance by ElecSoft Consulting. A financial blog and news source.">
-    <meta name="keywords" content="Stockr Finance, Stocks, Finance, Money, News, The Wall Street Journal, Bloomberg, The New York Times, The Times Of India, Reuters, Google News, Fortune, Business Insider, CNBC, Al-Jazeera, North York, GTA, Toronto, Missisauga">
+    <meta name="description" content="Stockr Finance by ElecSoft. A financial blog and news source.">
+    <meta name="keywords" content="Tech Alerts, Tech, Alerts, Technology, News, Ars Technica, Tech Crunch, Tech Radar, Hacker News, North York, GTA, Toronto, Missisauga">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Stockr Finance by ElecSoft Consulting. A financial blog and news source. stockrfinance.com">
-    <meta property="og:description" content="Stockr Finance by ElecSoft Consulting. A financial blog and news source. Sign up and start reading now!">
-    <meta property="og:url" content="http://stockrfinance.com/">
-      <meta property="og:site_name" content="Stockr Finance">
+    <meta property="og:title" content="Tech Alerts by ElecSoft. A blog and news source on Technology. techalerts.org and techalerts.ca">
+    <meta property="og:description" content="Tech Alerts by ElecSoft. A blog and news source on Technology. Get all your Technology related news here!">
+    <meta property="og:url" content="http://techalerts.ca/">
+      <meta property="og:site_name" content="Tech Alerts">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:description" content="Stockr Finance by ElecSoft Consulting. A financial blog and news source. Sign up and start reading now!">
-    <meta name="twitter:title" content="Stockr Finance ~ Get up to date financial news and opinions, all in one place!">
-    <meta name="twitter:image" content="http://stockrfinance.com/money.jpg">
+    <meta name="twitter:description" content="Tech Alerts by ElecSoft. A blog and news source on Technology. Get all your Technology related news here!">
+    <meta name="twitter:title" content="Tech Alerts ~ Get up to date Technology news and opinions, all in one place!">
+    <meta name="twitter:image" content="http://img.freepik.com/free-vector/designers-working-together-with-reports_23-2147495188.jpg?size=338&ext=jpg">
 
     <link rel="stylesheet" href="/styles/layout.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -32,7 +32,7 @@
     <nav class="navbar ">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <strong>Stockr</strong>
+          <strong>Tech Alerts</strong>
         </a>
 
         <div class="navbar-burger burger" data-target="navMenuTransparentExample">
@@ -49,38 +49,20 @@
               Trending
             </a>
             <div class="navbar-dropdown is-boxed">
-              <a class="navbar-item " href="/wsj">
-                The WSJ
+              <a class="navbar-item " href="/arstechnica">
+                Ars Technica
               </a>
-              <a class="navbar-item " href="/businessInsider">
-                Business Insider
+              <a class="navbar-item " href="/techradar">
+                TechRadar
               </a>
-              <a class="navbar-item " href="/economist">
-                The Economist
+              <a class="navbar-item " href="/hackernews">
+                Hacker News
               </a>
-              <a class="navbar-item " href="/bloomberg">
-                Bloomberg
+              <a class="navbar-item " href="/techcrunch">
+                TechCrunch
               </a>
-              <a class="navbar-item " href="/fortune">
-                Fortune
-              </a>
-              <a class="navbar-item " href="/nytimes">
-                New York Times
-              </a>
-              <a class="navbar-item " href="/cnbc">
-                CNBC
-              </a>
-              <a class="navbar-item " href="/aljazeera">
-                Aljazeera
-              </a>
-              <a class="navbar-item " href="/google">
-                Google News
-              </a>
-              <a class="navbar-item " href="/reuters">
-                Reuters
-              </a>
-              <a class="navbar-item " href="/toi">
-                The Times Of India
+              <a class="navbar-item " href="/newscientist">
+                New Scientist
               </a>
             </div>
           </div>
@@ -105,7 +87,7 @@
                 </p>
               </div>
             </div>
-          <% } else { %>
+          <% } else {%>
             <a href="/write" class="navbar-item">Write</a>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link  is-active">
@@ -122,77 +104,116 @@
       </div>
     </nav>
 
-    <section class="hero banner is-large">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title" style="font-family: 'Rajdhani', sans-serif;">
-            <strong id="typed-strings"></strong>
-          </h1>
-        </div>
-      </div>
-    </section>
-
     <br />
 
     <section class="section">
       <h1 class="title has-text-centered" id="topStories">Today's top stories</h1>
 
       <% if (data[0]) { %>
-        <div class="columns is-mobile is-centered">
-          <div class="column is-6-desktop">
-            <div class="card">
-              <a href="/article/<%=data[0].url%>">
-                <div class="card-image">
-                  <figure class="image is-3by3">
-                    <img src="<%= data[0].urlToImage %>" alt="Image">
-                  </figure>
-                </div>
-              </a>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <p class="title is-4"><%= data[0].title %></p>
+        <% var ad = 0; %>
+        <% for (var i = 0; i < data.length; i++) { %>
+          <% ad++; %>
+          <%if (ad == 3 || ad == 6 || ad == 9) {%>
+            <div class="columns is-mobile is-centered" style="overflow-x: scroll;">
+              <div class="column is-6-desktop">
+                <div class="card">
+                  <a href="" target="_blank">
+                    <div class="card-image">
+                      <figure class="THIS IS AN AD">
+                      </figure>
+                    </div>
+                  </a>
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-content">
+                        <p class="title is-4">THIS IS AN AD</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      <% } %>
 
-      <% if (response2[0]) { %>
-        <% for (var i = 0; i < response2.length; i++) { %>
-        <div class="columns is-mobile is-centered">
-          <div class="column is-6-desktop">
-            <div class="card">
-              <a href="/article/<%=response2[i].posts_id%>">
-                <div class="card-image">
-                  <figure class="image is-3by3">
-                    <img src="<%= response2[i].image_url %>" alt="Image">
-                  </figure>
+            <div class="columns is-mobile is-centered" style="overflow-x: scroll;">
+              <div class="column is-6-desktop">
+                <div class="card">
+                  <a href="<%=data[i].url%>" target="_blank">
+                    <div class="card-image">
+                      <figure class="image is-3by3">
+                        <img src="<%= data[i].urlToImage %>" alt="<%= data[i].title %>">
+                      </figure>
+                    </div>
+                  </a>
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-content">
+                        <p class="title is-4"><%= data[i].title %></p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </a>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <p class="title is-4"><%= response2[i].title %></p>
+              </div>
+            </div>
+
+          <% } else {%>
+            <div class="columns is-mobile is-centered" style="overflow-x: scroll;">
+              <div class="column is-6-desktop">
+                <div class="card">
+                  <a href="<%=data[i].url%>" target="_blank">
+                    <div class="card-image">
+                      <figure class="image is-3by3">
+                        <img src="<%= data[i].urlToImage %>" alt="<%= data[i].title %>">
+                      </figure>
+                    </div>
+                  </a>
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-content">
+                        <p class="title is-4"><%= data[i].title %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% } %>
+
+
+        <% } %>
+
+        <% } %>
+
+        <% if (response2[0]) { %>
+          <% for (var i = 0; i < response2.length; i++) { %>
+          <div class="columns is-mobile is-centered">
+            <div class="column is-6-desktop">
+              <div class="card">
+                <a href="/article/<%=response2[i].posts_id%>">
+                  <div class="card-image">
+                    <figure class="image is-3by3">
+                      <img src="<%= response2[i].image_url %>" alt="Image">
+                    </figure>
+                  </div>
+                </a>
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p class="title is-4"><%= response2[i].title %></p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <% } %>
-      <%} else if (response2){%>
-        <h1 class="title column" id="noStories">No Stories trending right now. <a href="/login">Login</a> or <a href="/signup">Sign Up</a> and start writing one now!</h1>
-      <% } %>
+          <% } %>
+        <%}%>
     </section>
 
     <footer class="footer">
       <div class="container">
         <div class="content has-text-centered">
           <p>
-            <strong>Stockr</strong> Finance by <a href="http://elecsoftconsulting.com">ElecSoft Consulting.</a>
+            <strong>Tech</strong> Alerts by <a href="http://elecsoftconsulting.com">ElecSoft.</a>
           </p>
         </div>
       </div>

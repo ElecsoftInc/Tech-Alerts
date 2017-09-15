@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="./favicon.png" type="img/x-icon">
-    <title>Write Articles ~ Stockr Finance</title>
+    <title>Write Articles ~ Tech Alerts</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico"/>
@@ -14,21 +14,13 @@
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous">
     </script>
-
-    <!-- Main Quill library -->
-    <!-- <script src="//cdn.quilljs.com/1.3.2/quill.js"></script> -->
-    <script src="//cdn.quilljs.com/1.3.2/quill.min.js"></script>
-
-    <!-- Theme included stylesheets -->
-    <link href="//cdn.quilljs.com/1.3.2/quill.snow.css" rel="stylesheet">
-    <!-- <link href="//cdn.quilljs.com/1.3.2/quill.bubble.css" rel="stylesheet"> -->
   </head>
   <body>
 
     <nav class="navbar ">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <strong>Stockr</strong>
+          <strong>Tech Alerts</strong>
         </a>
 
         <div class="navbar-burger burger" data-target="navMenuTransparentExample">
@@ -45,38 +37,20 @@
               Trending
             </a>
             <div class="navbar-dropdown is-boxed">
-              <a class="navbar-item " href="/wsj">
-                The WSJ
+              <a class="navbar-item " href="/arstechnica">
+                Ars Technica
               </a>
-              <a class="navbar-item " href="/businessInsider">
-                Business Insider
+              <a class="navbar-item " href="/techradar">
+                TechRadar
               </a>
-              <a class="navbar-item " href="/economist">
-                The Economist
+              <a class="navbar-item " href="/hackernews">
+                Hacker News
               </a>
-              <a class="navbar-item " href="/bloomberg">
-                Bloomberg
+              <a class="navbar-item " href="/techcrunch">
+                TechCrunch
               </a>
-              <a class="navbar-item " href="/fortune">
-                Fortune
-              </a>
-              <a class="navbar-item " href="/nytimes">
-                New York Times
-              </a>
-              <a class="navbar-item " href="/cnbc">
-                CNBC
-              </a>
-              <a class="navbar-item " href="/aljazeera">
-                Aljazeera
-              </a>
-              <a class="navbar-item " href="/google">
-                Google News
-              </a>
-              <a class="navbar-item " href="/reuters">
-                Reuters
-              </a>
-              <a class="navbar-item " href="/toi">
-                The Times Of India
+              <a class="navbar-item " href="/newscientist">
+                New Scientist
               </a>
             </div>
           </div>
@@ -129,11 +103,7 @@
         <div class="field">
           <label class="title is-4">Story</label>
           <div class="control">
-            <!-- <label for="about">Story</label> -->
-            <input name="about" type="hidden">
-            <div id="editor-container" style="height: 300px;">
-              <p>A robot who has developed sentience, and is the only robot of his kind shown to be still functioning on Earth.</p>
-            </div>
+            <textarea class="input" name="story" type="text" id="Story" placeholder="Tell your story here..." required style="height: 200px;"></textarea>
           </div>
         </div>
         <div class="field is-grouped is-grouped-right">
@@ -146,38 +116,6 @@
     </div>
   </div>
 
-
-<!--   <div id="form-container" class="container">
-  <form>
-    <div class="row">
-      <div class="col-xs-4">
-        <img class="img-rounded" src="./money.jpg">
-        <a class="change-link" href='#'>Change picture</a>
-      </div>
-      <div class="col-xs-8">
-        <div class="form-group">
-          <label for="display_name">Display name</label>
-          <input class="form-control" name="display_name" type="text" value="Wall-E">
-        </div>
-        <div class="form-group">
-          <label for="location">Location</label>
-          <input class="form-control"  name="location" type="text" value="Earth">
-        </div>
-      </div>
-    </div>
-    <div class="row form-group">
-      <label for="about">About me</label>
-      <input name="about" type="hidden">
-      <div id="editor-container">
-        <p>A robot who has developed sentience, and is the only robot of his kind shown to be still functioning on Earth.</p>
-      </div>
-    </div>
-    <div class="row">
-      <button class="btn btn-primary" type="submit">Save Profile</button>
-    </div>
-  </form>
-</div> -->
-
   <br>
   <br>
   <br>
@@ -186,24 +124,12 @@
     <div class="container">
       <div class="content has-text-centered">
         <p>
-          <strong>Stockr</strong> Finance by <a href="http://elecsoftconsulting.com">ElecSoft Consulting.</a>
-        </p>
+          <strong>Tech</strong> Alerts by <a href="http://elecsoftconsulting.com">ElecSoft.</a>
       </div>
     </div>
   </footer>
 
   <script type="text/javascript">
-
-    var quill = new Quill('#editor-container', {
-      modules: {
-        toolbar: [
-          ['bold', 'italic'],
-          ['link', 'blockquote', 'code-block', 'image'],
-          [{ list: 'ordered' }, { list: 'bullet' }]
-        ]
-      },
-      theme: 'snow'
-    });
 
     document.addEventListener('DOMContentLoaded', function () {
       // Get all "navbar-burger" elements
@@ -227,19 +153,6 @@
         });
       }
     });
-
-    var form = document.querySelector('form');
-    form.onsubmit = function() {
-      // Populate hidden form on submit
-      var story = document.querySelector('input[name=about]');
-      story.value = JSON.stringify(quill.getContents());
-
-      console.log("Submitted", $(form).serialize(), $(form).serializeArray());
-
-      // No back end to actually submit to!
-      alert('Open the console to see the submit data!')
-      return false;
-    };
 
   </script>
   </body>

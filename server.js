@@ -79,8 +79,8 @@ app.get("/", (req, res) => {
           .limit(3)
       .then((response2)=> {
         console.log('second response', response2)
-        var apiArray = ['the-wall-street-journal', 'business-insider', 'the-economist', 'bloomberg', 'fortune', 'the-new-york-times', 'cnbc', 'al-jazeera-english', 'google-news', 'reuters', 'the-times-of-india'];
-        var randomSource = apiArray[Math.floor(Math.random() * (apiArray.length + 1))];
+        var apiArray = ['ars-technica', 'hacker-news', 'techcrunch', 'techradar'];
+        var randomSource = apiArray[Math.floor(Math.random() * 4)];
         console.log('RANDOM SOURCE:::', randomSource)
 
         var url = `http://newsapi.org/v1/articles?` +
@@ -116,12 +116,6 @@ app.get("/", (req, res) => {
         }).on('error', (e)=>{
           console.log('got an error', e)
         })
-        // var templateVariable = {
-        //   name: response[0].full_name,
-        //   user: req.session.userID,
-        //   response2: response2
-        // }
-        // res.render("index", templateVariable);
       })
     })
   } else {
@@ -131,8 +125,8 @@ app.get("/", (req, res) => {
         .limit(2)
     .then((response2)=> {
       console.log('response2', response2)
-      var apiArray = ['the-wall-street-journal', 'business-insider', 'the-economist', 'bloomberg', 'fortune', 'the-new-york-times', 'cnbc', 'al-jazeera-english', 'google-news', 'reuters', 'the-times-of-india'];
-      var randomSource = apiArray[Math.floor(Math.random() * (apiArray.length + 1))];
+      var apiArray = ['ars-technica', 'hacker-news', 'techcrunch', 'techradar'];
+      var randomSource = apiArray[Math.floor(Math.random() * 4)];
       console.log('RANDOM SOURCE:::', randomSource)
 
       var url = `http://newsapi.org/v1/articles?` +
@@ -171,11 +165,6 @@ app.get("/", (req, res) => {
     })
   }
 });
-
-app.post('/hello', (req, res)=> {
-  console.log('YOYOYOYOYO', req.body)
-})
-
 
 //Login Page. If session exists, autmatic redirect to home page.
 app.get('/login', (req, res) => {
@@ -332,7 +321,7 @@ app.post('/submitArticle', upload.single('image'), (req, res)=> {
                 article_id: response2[0].posts_id,
                 date_created: new Date,
                 commenter_id: null,
-                commenter_name: 'Stockr Finance'
+                commenter_name: 'Tech Alerts'
               }])
           .then((response3)=> {
             console.log('if you can see this, comment has been inserted. EVERYTHING SHOULD WORK NOW')
@@ -490,11 +479,11 @@ app.post('/postComment', (req, res)=> {
 // All api calls are basically the same. The only thing that changes is the source in the url.
 // Using http to get json from the api and sending data to the front end to be able to iterate over and display.
 
-app.get('/wsj', (req, res)=> {
+app.get('/arstechnica', (req, res)=> {
   if(req.session.userID){
     console.log('session exists', req.session.name)
     var url = 'http://newsapi.org/v1/articles?' +
-              'source=the-wall-street-journal&'+
+              'source=ars-technica&'+
               'sortBy=top&'+
               'apiKey=f43f221fbd094da99409fcabf4ff0de2';
 
@@ -519,7 +508,7 @@ app.get('/wsj', (req, res)=> {
           data: data.articles,
           name: req.session.name,
           user: req.session.userID,
-          sourceName: "The Wall Street Journal"
+          sourceName: "Ars Technica"
         }
         res.render('newsApi', templateVariable)
       });
@@ -528,7 +517,7 @@ app.get('/wsj', (req, res)=> {
     })
   } else {
     var url = 'http://newsapi.org/v1/articles?' +
-              'source=the-wall-street-journal&'+
+              'source=ars-technica&'+
               'sortBy=top&'+
               'apiKey=f43f221fbd094da99409fcabf4ff0de2';
 
@@ -553,7 +542,7 @@ app.get('/wsj', (req, res)=> {
           data: data.articles,
           name: null,
           user: null,
-          sourceName: "The Wall Street Journal"
+          sourceName: "Ars Technica"
         }
         res.render('newsApi', templateVariable)
       });
@@ -564,10 +553,10 @@ app.get('/wsj', (req, res)=> {
 
 })
 
-app.get('/businessInsider', (req, res)=> {
+app.get('/techcrunch', (req, res)=> {
   if(req.session.userID){
     var url = 'http://newsapi.org/v1/articles?'+
-              'source=business-insider&'+
+              'source=techcrunch&'+
               'sortBy=top&'+
               'apiKey=f43f221fbd094da99409fcabf4ff0de2';
 
@@ -592,7 +581,7 @@ app.get('/businessInsider', (req, res)=> {
           data: data.articles,
           name: req.session.name,
           user: req.session.userID,
-          sourceName: "Business Insider"
+          sourceName: "Tech Crunch"
         }
         res.render('newsApi', templateVariable)
       });
@@ -626,7 +615,7 @@ app.get('/businessInsider', (req, res)=> {
           data: data.articles,
           name: null,
           user: null,
-          sourceName: "Business Insider"
+          sourceName: "Tech Crunch"
         }
         res.render('newsApi', templateVariable)
       });
@@ -637,11 +626,11 @@ app.get('/businessInsider', (req, res)=> {
 
 })
 
-app.get('/economist', (req, res)=> {
+app.get('/techradar', (req, res)=> {
   if(req.session.userID){
     console.log('LOOOK HERE,', req.session)
     var url = 'http://newsapi.org/v1/articles?'+
-              'source=the-economist&'+
+              'source=techradar&'+
               'sortBy=top&'+
               'apiKey=f43f221fbd094da99409fcabf4ff0de2';
 
@@ -666,7 +655,7 @@ app.get('/economist', (req, res)=> {
           data: data.articles,
           name: req.session.name,
           user: req.session.userID,
-          sourceName: "The Economist"
+          sourceName: "Tech Radar"
         }
         res.render('newsApi', templateVariable)
       });
@@ -675,7 +664,7 @@ app.get('/economist', (req, res)=> {
     })
   } else {
     var url = 'http://newsapi.org/v1/articles?'+
-              'source=the-economist&'+
+              'source=techradar&'+
               'sortBy=top&'+
               'apiKey=f43f221fbd094da99409fcabf4ff0de2';
 
@@ -700,7 +689,7 @@ app.get('/economist', (req, res)=> {
           data: data.articles,
           name: null,
           user: null,
-          sourceName: "The Economist"
+          sourceName: "Tech Radar"
         }
         res.render('newsApi', templateVariable)
       });
@@ -711,11 +700,11 @@ app.get('/economist', (req, res)=> {
 
 })
 
-app.get('/bloomberg', (req, res)=> {
+app.get('/hackernews', (req, res)=> {
   if(req.session.userID){
     console.log('LOOOK HERE,', req.session)
     var url = 'http://newsapi.org/v1/articles?'+
-              'source=bloomberg&'+
+              'source=hacker-news&'+
               'sortBy=top&'+
               'apiKey=f43f221fbd094da99409fcabf4ff0de2';
 
@@ -740,7 +729,7 @@ app.get('/bloomberg', (req, res)=> {
           data: data.articles,
           name: req.session.name,
           user: req.session.userID,
-          sourceName: "Bloomberg"
+          sourceName: "Hacker News"
         }
         res.render('newsApi', templateVariable)
       });
@@ -749,7 +738,7 @@ app.get('/bloomberg', (req, res)=> {
     })
   } else {
     var url = 'http://newsapi.org/v1/articles?'+
-              'source=bloomberg&'+
+              'source=hacker-news&'+
               'sortBy=top&'+
               'apiKey=f43f221fbd094da99409fcabf4ff0de2';
 
@@ -774,7 +763,7 @@ app.get('/bloomberg', (req, res)=> {
           data: data.articles,
           name: null,
           user: null,
-          sourceName: "Bloomberg"
+          sourceName: "Hacker News"
         }
         res.render('newsApi', templateVariable)
       });
@@ -785,11 +774,11 @@ app.get('/bloomberg', (req, res)=> {
 
 })
 
-app.get('/fortune', (req, res)=> {
+app.get('/newscientist', (req, res)=> {
   if(req.session.userID){
-    console.log('LOOOK HERE,', req.session)
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=fortune&'+
+    console.log('session exists', req.session.name)
+    var url = 'http://newsapi.org/v1/articles?' +
+              'source=new-scientist&'+
               'sortBy=top&'+
               'apiKey=f43f221fbd094da99409fcabf4ff0de2';
 
@@ -814,7 +803,7 @@ app.get('/fortune', (req, res)=> {
           data: data.articles,
           name: req.session.name,
           user: req.session.userID,
-          sourceName: "Fortune"
+          sourceName: "New Scientist"
         }
         res.render('newsApi', templateVariable)
       });
@@ -822,82 +811,8 @@ app.get('/fortune', (req, res)=> {
       console.log('got an error', e)
     })
   } else {
-        var url = 'http://newsapi.org/v1/articles?'+
-                  'source=fortune&'+
-                  'sortBy=top&'+
-                  'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: null,
-          user: null,
-          sourceName: "Fortune"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  }
-
-})
-
-app.get('/nytimes', (req, res)=> {
-  if(req.session.userID){
-    console.log('LOOOK HERE,', req.session)
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=the-new-york-times&'+
-              'sortBy=top&'+
-              'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: req.session.name,
-          user: req.session.userID,
-          sourceName: "The New York Times"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  } else {
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=the-new-york-times&'+
+    var url = 'http://newsapi.org/v1/articles?' +
+              'source=new-scientist&'+
               'sortBy=top&'+
               'apiKey=f43f221fbd094da99409fcabf4ff0de2';
 
@@ -922,7 +837,7 @@ app.get('/nytimes', (req, res)=> {
           data: data.articles,
           name: null,
           user: null,
-          sourceName: "The New York Times"
+          sourceName: "New Scientist"
         }
         res.render('newsApi', templateVariable)
       });
@@ -930,371 +845,7 @@ app.get('/nytimes', (req, res)=> {
       console.log('got an error', e)
     })
   }
-})
 
-app.get('/cnbc', (req, res)=> {
-  if(req.session.userID){
-    console.log('LOOOK HERE,', req.session)
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=cnbc&'+
-              'sortBy=top&'+
-              'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: req.session.name,
-          user: req.session.userID,
-          sourceName: "CNBC"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  } else {
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=cnbc&'+
-              'sortBy=top&'+
-              'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: null,
-          user: null,
-          sourceName: "CNBC"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  }
-})
-
-app.get('/aljazeera', (req, res)=> {
-  if(req.session.userID){
-    console.log('LOOOK HERE,', req.session)
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=al-jazeera-english&'+
-              'sortBy=top&'+
-              'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: req.session.name,
-          user: req.session.userID,
-          sourceName: "Al Jazeera"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  } else {
-    var url = 'http://newsapi.org/v1/articles?'+
-          'source=al-jazeera-english&'+
-          'sortBy=top&'+
-          'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: null,
-          user: null,
-          sourceName: "Al Jazeera"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  }
-})
-
-app.get('/google', (req, res)=> {
-  if(req.session.userID){
-    console.log('LOOOK HERE,', req.session)
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=google-news&'+
-              'sortBy=top&'+
-              'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: req.session.name,
-          user: req.session.userID,
-          sourceName: "Google News"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  } else {
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=google-news&'+
-              'sortBy=top&'+
-              'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: null,
-          user: null,
-          sourceName: "Google News"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  }
-})
-
-app.get('/toi', (req, res)=> {
-  if(req.session.userID){
-    console.log('LOOOK HERE,', req.session)
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=the-times-of-india&'+
-              'sortBy=top&'+
-              'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: req.session.name,
-          user: req.session.userID,
-          sourceName: "The Times Of India"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  } else {
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=the-times-of-india&'+
-              'sortBy=top&'+
-              'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: null,
-          user: null,
-          sourceName: "The Times Of India"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  }
-})
-
-app.get('/reuters', (req, res)=> {
-  if(req.session.userID){
-    console.log('LOOOK HERE,', req.session)
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=reuters&'+
-              'sortBy=top&'+
-              'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: req.session.name,
-          user: req.session.userID,
-          sourceName: "Reuters"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  } else {
-    var url = 'http://newsapi.org/v1/articles?'+
-              'source=reuters&'+
-              'sortBy=top&'+
-              'apiKey=f43f221fbd094da99409fcabf4ff0de2';
-
-    //using http to get the json object
-    var object = '';
-
-    var data;
-    http.get(url, function(response){
-      // var object = '';
-
-      response.on('data', (chunk)=> {
-        object += chunk;
-        //var data = JSON.parse(object);
-        //console.log("right here buddy",data)
-      })
-
-      response.on('end', function(){
-        data = JSON.parse(object);
-        console.log("Got a response: ", data);
-        console.log('length',data.articles.length)
-        var templateVariable = {
-          data: data.articles,
-          name: null,
-          user: null,
-          sourceName: "Reuters"
-        }
-        res.render('newsApi', templateVariable)
-      });
-    }).on('error', (e)=>{
-      console.log('got an error', e)
-    })
-  }
 })
 
 app.listen(PORT, () => {

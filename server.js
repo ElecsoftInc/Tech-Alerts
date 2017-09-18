@@ -474,6 +474,10 @@ app.post('/postComment', (req, res)=> {
   }
 })
 
+app.get('/privacypolicy', (req, res)=> {
+  res.render('privacypolicy');
+})
+
 /*************  NEWS API CALL FROM HERE ON OUT  *************/
 
 // All api calls are basically the same. The only thing that changes is the source in the url.

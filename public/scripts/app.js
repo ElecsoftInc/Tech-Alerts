@@ -1,10 +1,18 @@
 // const Typed = require('typed.js');
 
 $(() => {
-  $("#typed-strings").typed({
-      strings: ["Finance...", 'News...', 'Blog...', 'Stockr...'],
-      typeSpeed: 100
-      //showCursor: false
-      // loop: false
-  });
+
+  // $('#seeMore').on('click', (e)=> {
+  //   e.preventDefault();
+  //   console.log('KEWL');
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: '/techradar'
+  //   }).then((fromServer)=> {
+  //     console.log("LOOOOK",fromServer)
+  //   })
+  //   //$('#newDiv').append('<h1>HELLLLLLLLLLLLLLLLLLP</h1>')
+  // })
+
+
 });

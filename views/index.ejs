@@ -154,7 +154,9 @@
                   <div class="card-content">
                     <div class="media">
                       <div class="media-content">
-                        <p class="title is-4"><%= data[i].title %></p>
+                        <a href="<%=data[i].url%>" target="_blank">
+                          <p class="title is-4"><%= data[i].title %></p>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -176,7 +178,9 @@
                   <div class="card-content">
                     <div class="media">
                       <div class="media-content">
-                        <p class="title is-4"><%= data[i].title %></p>
+                        <a href="<%=data[i].url%>" target="_blank">
+                          <p class="title is-4"><%= data[i].title %></p>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -215,6 +219,22 @@
           <% } %>
         <%}%>
     </section>
+
+    <div class="columns is-mobile is-centered">
+      <div class="column is-6-desktop is-offset-4">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control">
+              <a class="tw-button button is-primary" id="seeMore">See more</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="newDiv">
+
+    </div>
 
     <footer class="footer">
       <div class="container">

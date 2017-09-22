@@ -21,7 +21,12 @@
     <link rel="stylesheet" href="/styles/layout.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css">
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <!-- <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script> -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous">
+    </script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Rajdhani:400" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.bootcss.com/typed.js/1.1.4/typed.min.js"></script>
@@ -121,7 +126,7 @@
         <% for (var i = 0; i < data.length; i++) { %>
           <% ad++; %>
           <%if (ad == 3 || ad == 6 || ad == 9) {%>
-            <div class="columns is-mobile is-centered">
+            <div class="columns is-mobile is-centered" style="display: none;">
               <div class="column is-6-desktop">
                 <div class="card">
                   <a href="" target="_blank">
@@ -147,7 +152,17 @@
                   <a href="<%=data[i].url%>" target="_blank">
                     <div class="card-image">
                       <figure class="image is-3by3">
-                        <img src="<%= data[i].urlToImage %>" alt="<%= data[i].title %>">
+                        <% if (data[i].urlToImage) { %>
+                          <img src="<%= data[i].urlToImage %>" alt="<%= data[i].title %>">
+                        <% } else if (source === 'techcrunch') { %>
+                          <img src="./TechCrunch-Logo.jpg" alt="<%= data[i].title %>">
+                        <% } else if (source === 'hacker-news') { %>
+                          <img src="./hacker-news.jpg" alt="<%= data[i].title %>">
+                        <% } else if (source === 'tech-radar') { %>
+                          <img src="./techradar_logo_800x450.jpg" alt="<%= data[i].title %>">
+                        <% } else if (source === 'ars-technica') { %>
+                          <img src="./ars-technica.png" alt="<%= data[i].title %>">
+                        <% } %>
                       </figure>
                     </div>
                   </a>
@@ -158,6 +173,10 @@
                           <p class="title is-4"><%= data[i].title %></p>
                         </a>
                       </div>
+                    </div>
+                    <div class="content">
+                      <%= data[i].description %>
+                      <br>
                     </div>
                   </div>
                 </div>
@@ -171,7 +190,17 @@
                   <a href="<%=data[i].url%>" target="_blank">
                     <div class="card-image">
                       <figure class="image is-3by3">
-                        <img src="<%= data[i].urlToImage %>" alt="<%= data[i].title %>">
+                        <% if (data[i].urlToImage) { %>
+                          <img src="<%= data[i].urlToImage %>" alt="<%= data[i].title %>">
+                        <% } else if (source === 'techcrunch') { %>
+                          <img src="./TechCrunch-Logo.jpg" alt="<%= data[i].title %>">
+                        <% } else if (source === 'hacker-news') { %>
+                          <img src="./hacker-news.jpg" alt="<%= data[i].title %>">
+                        <% } else if (source === 'tech-radar') { %>
+                          <img src="./techradar_logo_800x450.jpg" alt="<%= data[i].title %>">
+                        <% } else if (source === 'ars-technica') { %>
+                          <img src="./ars-technica.png" alt="<%= data[i].title %>">
+                        <% } %>
                       </figure>
                     </div>
                   </a>
@@ -182,6 +211,10 @@
                           <p class="title is-4"><%= data[i].title %></p>
                         </a>
                       </div>
+                    </div>
+                    <div class="content">
+                      <%= data[i].description %>
+                      <br>
                     </div>
                   </div>
                 </div>
@@ -225,14 +258,14 @@
         <div class="navbar-item">
           <div class="field is-grouped">
             <p class="control">
-              <a class="tw-button button is-primary" id="seeMore">See more</a>
+              <a class="tw-button button is-primary" id="techradar">Techradar</a>
             </p>
           </div>
         </div>
       </div>
     </div>
 
-    <div id="newDiv">
+    <div id="radar">
 
     </div>
 

@@ -79,12 +79,12 @@ app.get("/", (req, res) => {
           .limit(3)
       .then((response2)=> {
         console.log('second response', response2)
-        var apiArray = ['ars-technica', 'hacker-news', 'techcrunch', 'techradar'];
-        var randomSource = apiArray[Math.floor(Math.random() * 4)];
+        var apiArray = ['ars-technica', 'hacker-news', 'techcrunch', 'techradar', 'new-scientist'];
+        var randomSource = apiArray[Math.floor(Math.random() * 5)];
         console.log('RANDOM SOURCE:::', randomSource)
 
         var url = `http://newsapi.org/v1/articles?` +
-                `source=${randomSource}&`+
+                `source=techcrunch&`+
                 `sortBy=top&`+
                 `apiKey=f43f221fbd094da99409fcabf4ff0de2`;
 
@@ -107,6 +107,7 @@ app.get("/", (req, res) => {
             console.log('length',data.articles.length)
             var templateVariable = {
               data: data.articles,
+              source: data.source,
               name: req.session.name,
               user: req.session.userID,
               response2: response2
@@ -125,12 +126,12 @@ app.get("/", (req, res) => {
         .limit(2)
     .then((response2)=> {
       console.log('response2', response2)
-      var apiArray = ['ars-technica', 'hacker-news', 'techcrunch', 'techradar'];
-      var randomSource = apiArray[Math.floor(Math.random() * 4)];
+      var apiArray = ['ars-technica', 'hacker-news', 'techcrunch', 'techradar', 'new-scientist'];
+      var randomSource = apiArray[Math.floor(Math.random() * 5)];
       console.log('RANDOM SOURCE:::', randomSource)
 
       var url = `http://newsapi.org/v1/articles?` +
-              `source=${randomSource}&`+
+              `source=techcrunch&`+
               `sortBy=top&`+
               `apiKey=f43f221fbd094da99409fcabf4ff0de2`;
 
@@ -153,6 +154,7 @@ app.get("/", (req, res) => {
           console.log('length', data.articles.length)
           var templateVariable = {
             data: data.articles,
+            source: data.source,
             name: null,
             user: null,
             response2: response2
@@ -279,7 +281,7 @@ app.get('/write', (req, res)=> {
 // Each image is uploaded to the uploads folder through multer. It is then accessed from there and uploaded to the cloud.
 // After the upload is successful, the file is deleted from the project directory and the content of the form,
 // with the image url are inserted into the db. Once the insert is successful, a comment is also added to the database
-// corresponding to the article id, so that it can be pulled out later to show the user that someone has read the post.
+// corresponding to the article id, so that it can be pulled out later to show the user that someone has read their post.
 app.post('/submitArticle', upload.single('image'), (req, res)=> {
   if (req.session.userID){
 
@@ -482,6 +484,193 @@ app.get('/privacypolicy', (req, res)=> {
 
 // All api calls are basically the same. The only thing that changes is the source in the url.
 // Using http to get json from the api and sending data to the front end to be able to iterate over and display.
+// The first 4 api calls (the ones that end in 'Home') are api calls that send data to the front end app.js file to be displayed on home page.
+
+app.get('/arstechnicaHome', (req, res)=> {
+  var url = 'http://newsapi.org/v1/articles?' +
+          'source=ars-technica&'+
+          'sortBy=top&'+
+          'apiKey=f43f221fbd094da99409fcabf4ff0de2';
+
+  //using http to get the json object
+  var object = '';
+
+  var data;
+  http.get(url, function(response){
+    // var object = '';
+
+    response.on('data', (chunk)=> {
+      object += chunk;
+      //var data = JSON.parse(object);
+      //console.log("right here buddy",data)
+    })
+
+    response.on('end', function(){
+      data = JSON.parse(object);
+      console.log("Got a response: ", data);
+      console.log('length',data.articles.length)
+      var templateVariable = {
+        data: data.articles,
+        name: null,
+        user: null,
+        sourceName: "Ars Technica"
+      }
+      //res.render('newsApi', templateVariable)
+      res.send(JSON.stringify(data))
+    });
+  }).on('error', (e)=>{
+    console.log('got an error', e)
+  })
+
+})
+
+// app.get('/techcrunchHome', (req, res) => {
+//   var url = 'http://newsapi.org/v1/articles?'+
+//             'source=techcrunch&'+
+//             'sortBy=top&'+
+//             'apiKey=f43f221fbd094da99409fcabf4ff0de2';
+
+//   //using http to get the json object
+//   var object = '';
+
+//   var data;
+//   http.get(url, function(response){
+//     // var object = '';
+
+//     response.on('data', (chunk)=> {
+//       object += chunk;
+//       //var data = JSON.parse(object);
+//       //console.log("right here buddy",data)
+//     })
+
+//     response.on('end', function(){
+//       data = JSON.parse(object);
+//       console.log("Got a response: ", data);
+//       console.log('length',data.articles.length)
+//       var templateVariable = {
+//         data: data.articles,
+//         name: null,
+//         user: null,
+//         sourceName: "Tech Crunch"
+//       }
+//       res.render('newsApi', templateVariable)
+//     });
+//   }).on('error', (e)=>{
+//     console.log('got an error', e)
+//   })
+// })
+
+app.get('/techradarHome', (req, res) => {
+  var url = 'http://newsapi.org/v1/articles?'+
+            'source=techradar&'+
+            'sortBy=top&'+
+            'apiKey=f43f221fbd094da99409fcabf4ff0de2';
+
+  //using http to get the json object
+  var object = '';
+
+  var data;
+  http.get(url, function(response){
+    // var object = '';
+
+    response.on('data', (chunk)=> {
+      object += chunk;
+      //var data = JSON.parse(object);
+      //console.log("right here buddy",data)
+    })
+
+    response.on('end', function(){
+      data = JSON.parse(object);
+      console.log("Got a response: ", data);
+      console.log('length',data.articles.length)
+      var templateVariable = {
+        data: data.articles,
+        name: null,
+        user: null,
+        sourceName: "Tech Radar"
+      }
+      //res.render('newsApi', templateVariable)
+      res.send(JSON.stringify(data))
+    });
+  }).on('error', (e)=>{
+    console.log('got an error', e)
+  })
+
+})
+
+app.get('/hackernewsHome', (req, res) => {
+  var url = 'http://newsapi.org/v1/articles?'+
+            'source=hacker-news&'+
+            'sortBy=top&'+
+            'apiKey=f43f221fbd094da99409fcabf4ff0de2';
+
+  //using http to get the json object
+  var object = '';
+
+  var data;
+  http.get(url, function(response){
+    // var object = '';
+
+    response.on('data', (chunk)=> {
+      object += chunk;
+      //var data = JSON.parse(object);
+      //console.log("right here buddy",data)
+    })
+
+    response.on('end', function(){
+      data = JSON.parse(object);
+      console.log("Got a response: ", data);
+      console.log('length',data.articles.length)
+      var templateVariable = {
+        data: data.articles,
+        name: null,
+        user: null,
+        sourceName: "Hacker News"
+      }
+      //res.render('newsApi', templateVariable)
+      res.send(JSON.stringify(data))
+    });
+  }).on('error', (e)=>{
+    console.log('got an error', e)
+  })
+})
+
+app.get('/newscientistHome', (req, res) => {
+  var url = 'http://newsapi.org/v1/articles?' +
+            'source=new-scientist&'+
+            'sortBy=top&'+
+            'apiKey=f43f221fbd094da99409fcabf4ff0de2';
+
+  //using http to get the json object
+  var object = '';
+
+  var data;
+  http.get(url, function(response){
+    // var object = '';
+
+    response.on('data', (chunk)=> {
+      object += chunk;
+      //var data = JSON.parse(object);
+      //console.log("right here buddy",data)
+    })
+
+    response.on('end', function(){
+      data = JSON.parse(object);
+      console.log("Got a response: ", data);
+      console.log('length',data.articles.length)
+      var templateVariable = {
+        data: data.articles,
+        name: null,
+        user: null,
+        sourceName: "New Scientist"
+      }
+      //res.render('newsApi', templateVariable)
+      res.send(JSON.stringify(data))
+    });
+  }).on('error', (e)=>{
+    console.log('got an error', e)
+  })
+})
 
 app.get('/arstechnica', (req, res)=> {
   if(req.session.userID){
@@ -515,6 +704,7 @@ app.get('/arstechnica', (req, res)=> {
           sourceName: "Ars Technica"
         }
         res.render('newsApi', templateVariable)
+        //res.send(JSON.stringify(data))
       });
     }).on('error', (e)=>{
       console.log('got an error', e)
@@ -549,6 +739,7 @@ app.get('/arstechnica', (req, res)=> {
           sourceName: "Ars Technica"
         }
         res.render('newsApi', templateVariable)
+        //res.send(JSON.stringify(data))
       });
     }).on('error', (e)=>{
       console.log('got an error', e)
@@ -594,7 +785,7 @@ app.get('/techcrunch', (req, res)=> {
     })
   } else {
     var url = 'http://newsapi.org/v1/articles?'+
-              'source=business-insider&'+
+              'source=techcrunch&'+
               'sortBy=top&'+
               'apiKey=f43f221fbd094da99409fcabf4ff0de2';
 
@@ -662,6 +853,7 @@ app.get('/techradar', (req, res)=> {
           sourceName: "Tech Radar"
         }
         res.render('newsApi', templateVariable)
+        //res.send(JSON.stringify(data))
       });
     }).on('error', (e)=>{
       console.log('got an error', e)
@@ -696,6 +888,7 @@ app.get('/techradar', (req, res)=> {
           sourceName: "Tech Radar"
         }
         res.render('newsApi', templateVariable)
+        //res.send(JSON.stringify(data))
       });
     }).on('error', (e)=>{
       console.log('got an error', e)
@@ -736,6 +929,7 @@ app.get('/hackernews', (req, res)=> {
           sourceName: "Hacker News"
         }
         res.render('newsApi', templateVariable)
+        //res.send(JSON.stringify(data))
       });
     }).on('error', (e)=>{
       console.log('got an error', e)
@@ -770,6 +964,7 @@ app.get('/hackernews', (req, res)=> {
           sourceName: "Hacker News"
         }
         res.render('newsApi', templateVariable)
+        //res.send(JSON.stringify(data))
       });
     }).on('error', (e)=>{
       console.log('got an error', e)
@@ -810,6 +1005,7 @@ app.get('/newscientist', (req, res)=> {
           sourceName: "New Scientist"
         }
         res.render('newsApi', templateVariable)
+        //res.send(JSON.stringify(data))
       });
     }).on('error', (e)=>{
       console.log('got an error', e)
@@ -844,6 +1040,7 @@ app.get('/newscientist', (req, res)=> {
           sourceName: "New Scientist"
         }
         res.render('newsApi', templateVariable)
+        //res.send(JSON.stringify(data))
       });
     }).on('error', (e)=>{
       console.log('got an error', e)

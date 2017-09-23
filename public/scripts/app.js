@@ -2,9 +2,6 @@ $(() => {
 
   $('#techradar').on('click', ()=> {
 
-    console.log('KEWL');
-    alert('THIS WORKED')
-
     $.ajax({
       url: '/techradarHome',
       type: 'GET'
@@ -49,7 +46,7 @@ $(() => {
                               <div class="navbar-item">
                                 <div class="field is-grouped">
                                   <p class="control">
-                                    <a class="tw-button button is-primary" id="hackerNews">Hacker News</a>
+                                    <a class="tw-button button is-primary" id="hackerNews">See More</a>
                                   </p>
                                 </div>
                               </div>
@@ -63,10 +60,6 @@ $(() => {
 
 
       $('#hackerNews').on('click', ()=> {
-
-        console.log('KEWL');
-        alert('Hacker');
-
 
         $.ajax({
           url: '/hackernewsHome',
@@ -112,7 +105,7 @@ $(() => {
                                   <div class="navbar-item">
                                     <div class="field is-grouped">
                                       <p class="control">
-                                        <a class="tw-button button is-primary" id="ars-technica">Ars Technica</a>
+                                        <a class="tw-button button is-primary" id="ars-technica">See More</a>
                                       </p>
                                     </div>
                                   </div>
@@ -127,8 +120,6 @@ $(() => {
 
           $('#ars-technica').on('click', ()=> {
 
-            console.log('KEWL');
-            alert('Technica');
 
             $.ajax({
               url: '/arstechnicaHome',
@@ -174,7 +165,7 @@ $(() => {
                                       <div class="navbar-item">
                                         <div class="field is-grouped">
                                           <p class="control">
-                                            <a class="tw-button button is-primary" id="new-scientist">New Scientist</a>
+                                            <a class="tw-button button is-primary" id="new-scientist">See More</a>
                                           </p>
                                         </div>
                                       </div>
@@ -187,10 +178,6 @@ $(() => {
 
 
               $('#new-scientist').on('click', ()=> {
-
-                console.log('KEWL');
-                alert('Scientist');
-
 
                 $.ajax({
                   url: '/newscientistHome',
